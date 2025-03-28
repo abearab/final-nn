@@ -134,18 +134,22 @@ class NeuralNetwork:
         cache = {}
         A_curr = X.T  # Transpose X to match the expected input shape
 
+        cache["A0"] = A_curr  # Store the input layer activation
+
         for idx, layer in enumerate(self.arch):
             layer_idx = idx + 1
             W_curr = self._param_dict[f"W{layer_idx}"]
             b_curr = self._param_dict[f"b{layer_idx}"]
+        
             activation = layer["activation"]
 
             A_curr, Z_curr = self._single_forward(W_curr, b_curr, A_curr, activation)
 
-            cache[f"A{layer_idx - 1}"] = A_curr if layer_idx > 1 else X.T
+            cache[f"A{layer_idx}"] = A_curr
             cache[f"Z{layer_idx}"] = Z_curr
 
-        output = A_curr.T  # Transpose back to match the expected output shape
+        output = A_curr # output, the final activation matrix
+        
         return output, cache
 
     def _single_backprop(
