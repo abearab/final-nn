@@ -7,9 +7,7 @@ from nn.preprocess import one_hot_encode_seqs, sample_seqs
 def test_single_forward():
     """Test the forward pass of a single neuron
     """
-    x = np.array([1, 2, 3])
-    w = np.array([0.5, 0.5, 0.5])
-    b = 0.5
+    x = np.array([[1, 2, 3]]).T
 
     toy_nn = NeuralNetwork(
         nn_arch=[
@@ -21,12 +19,14 @@ def test_single_forward():
         epochs=1,
         batch_size=1,
     )
-    A, Z = toy_nn._single_forward(A_prev=x, W_curr=w, b_curr=b, activation="sigmoid")
-    
-    assert A.shape == (1,), "Output shape mismatch"
-    assert Z.shape == (1,), "Z shape mismatch"
-    
+    W_curr = toy_nn._param_dict['W1']
+    b_curr = toy_nn._param_dict['b1']
 
+    A, Z = toy_nn._single_forward(W_curr, b_curr, x, "sigmoid")
+    
+    assert A.shape == (1,1), f"Expected output shape (1,1), got {A.shape}"
+    assert Z.shape == (1,1), f"Expected output shape (1,1), got {Z.shape}"
+    
 def test_forward():
     """Test the forward pass of the neural network
     """
