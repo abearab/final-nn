@@ -3,14 +3,13 @@
 [![final-nn](https://github.com/abearab/final-nn/actions/workflows/main.yml/badge.svg)](https://github.com/abearab/final-nn/actions/workflows/main.yml)
 
 ## Status
+
 - [x] Step 1: finish the neural network API
 - [x] Step 2: make your autoencoder
+  - see `1-autoencoder.ipynb`
 - [x] Step 3: make your classifier
+  - see `2-classifier.ipynb`
 - [x] Write tests
-
-## Notebooks
-- `1-autoencoder.ipynb`: autoencoder notebook
-- `2-classifier.ipynb`: classifier notebook
 
 <details><summary> click here </summary>
 
