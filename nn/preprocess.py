@@ -66,14 +66,19 @@ def one_hot_encode_seqs(seq_arr: List[str]) -> ArrayLike:
         'T': [0, 1, 0, 0], 
         'C': [0, 0, 1, 0], 
         'G': [0, 0, 0, 1], 
-        'N': [0, 0, 0, 0]
     }
 
-    encode = []
+    # Initialize an empty list to hold the one-hot encodings
+    out = []
+    # Iterate through each sequence
     for seq in seq_arr:
-        tmp_encode = []
+        encodings = []
+        # For each base in the sequence, append its one-hot encoding
         for base in seq:
-            tmp_encode.extend(dict_map[base])
-        encode.append(tmp_encode)
-    
-    return np.array(encode)  # Return as a numpy array for compatibility with neural networks
+            encodings.extend(dict_map.get(base, [0, 0, 0, 0]))
+        # Convert the list to a numpy array and return
+        out.append(np.array(encodings))
+
+    out = np.array(out)
+
+    return out
