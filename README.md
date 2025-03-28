@@ -6,7 +6,7 @@
 - [x] Step 1: finish the neural network API
 - [x] Step 2: make your autoencoder
 - [x] Step 3: make your classifier
-- [ ] Write tests
+- [x] Write tests
 
 ## Notebooks
 - `1-autoencoder.ipynb`: autoencoder notebook
