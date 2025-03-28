@@ -487,7 +487,7 @@ class NeuralNetwork:
         """
 
         # Compute the mean squared error
-        loss = (1 / (2 * y.shape[1])) * np.sum((y_hat - y) ** 2)
+        loss = (1 / (2 * y.shape[1])) * np.sum(np.square(y_hat - y))
 
         return loss
     
