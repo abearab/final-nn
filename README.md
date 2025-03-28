@@ -10,7 +10,9 @@ In this assignment, you will implement a neural network class from (almost) scra
 
 You will begin by finishing the API for generating fully connected neural networks from scratch. You will then make Jupyter Notebooks where you create, train, and test your autoencoder and classifier.
 
-## Step 1: finish the neural network API
+<details><summary> click here </summary>
+
+## [x] Step 1: finish the neural network API
 
 ### For steps 2 and 3
 
@@ -21,7 +23,7 @@ You will begin by finishing the API for generating fully connected neural networ
 * Finish the `sample_seqs` function in the `preprocess.py` file.
 * Finish the `one_hot_encode_seqs` function in the `preprocess.py` file.
 
-## Step 2: make your autoencoder
+## [ ] Step 2: make your autoencoder
 
 ### Background
 
@@ -41,7 +43,7 @@ You will train a 64x16x64 autoencoder on the [digits](https://scikit-learn.org/s
 * Quantify your average reconstruction error over the validation set.
 * Explain why you chose the hyperparameter values you did.
 
-## Step 3: make your classifier
+## [ ] Step 3: make your classifier
 
 ### Background
 
@@ -112,3 +114,5 @@ Proper unit tests for:
 
 ### Submission
 Please submit a link to your final project repo [here](https://forms.gle/9xWdSinubVTYTwL2A)
+
+</details>
