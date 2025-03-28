@@ -475,8 +475,6 @@ class NeuralNetwork:
             loss: float
                 Average loss of mini-batch.
         """
-        print(f"y shape: {y.shape}")
-        print(f"y_hat shape: {y_hat.shape}")
 
         # Compute the mean squared error
         loss = (1 / (2 * y.shape[1])) * np.sum((y_hat - y) ** 2)
@@ -497,8 +495,6 @@ class NeuralNetwork:
             dA: ArrayLike
                 partial derivative of loss with respect to A matrix.
         """
-        print(f"y shape: {y.shape}")
-        print(f"y_hat shape: {y_hat.shape}")
 
         # Compute the derivative of the mean squared error
         dA = (2 / y.shape[1]) * (y_hat - y)
