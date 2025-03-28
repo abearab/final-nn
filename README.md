@@ -1,5 +1,18 @@
 # Final project: neural network
 
+[![final-nn](https://github.com/abearab/final-nn/actions/workflows/main.yml/badge.svg)](https://github.com/abearab/final-nn/actions/workflows/main.yml)
+
+## Status
+- [x] Step 1: finish the neural network API
+- [x] Step 2: make your autoencoder
+- [x] Step 3: make your classifier
+
+## Notebooks
+- `1-autoencoder.ipynb`: autoencoder notebook, 
+- `2-classifier.ipynb`: classifier notebook
+
+<details><summary> click here </summary>
+
 ## Overview
 
 In this assignment, you will implement a neural network class from (almost) scratch. You will then apply your class to create both:
@@ -10,9 +23,7 @@ In this assignment, you will implement a neural network class from (almost) scra
 
 You will begin by finishing the API for generating fully connected neural networks from scratch. You will then make Jupyter Notebooks where you create, train, and test your autoencoder and classifier.
 
-<details><summary> click here </summary>
-
-## [x] Step 1: finish the neural network API
+## Step 1: finish the neural network API
 
 ### For steps 2 and 3
 
@@ -23,7 +34,7 @@ You will begin by finishing the API for generating fully connected neural networ
 * Finish the `sample_seqs` function in the `preprocess.py` file.
 * Finish the `one_hot_encode_seqs` function in the `preprocess.py` file.
 
-## [x] Step 2: make your autoencoder
+## Step 2: make your autoencoder
 
 ### Background
 
@@ -43,7 +54,7 @@ You will train a 64x16x64 autoencoder on the [digits](https://scikit-learn.org/s
 * Quantify your average reconstruction error over the validation set.
 * Explain why you chose the hyperparameter values you did.
 
-## [ ] Step 3: make your classifier
+## Step 3: make your classifier
 
 ### Background
 
