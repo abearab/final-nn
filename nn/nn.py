@@ -402,8 +402,7 @@ class NeuralNetwork:
             dZ: ArrayLike
                 Partial derivative of current layer Z matrix.
         """
-        dZ = np.where(Z > 0, dA, 0)
-        return dZ
+        return dA * (Z > 0)
 
     def _binary_cross_entropy(self, y: ArrayLike, y_hat: ArrayLike) -> float:
         """
