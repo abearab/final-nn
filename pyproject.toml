@@ -16,7 +16,7 @@ python = ">=3.11"
 pytest = "*"
 pandas = "*"
 numpy = "*"
-sklearn = "*"
+scikit-learn = "*"
 scipy = "*"
 
 [tool.poetry.group.test.dependencies]
