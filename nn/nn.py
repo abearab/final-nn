@@ -316,9 +316,9 @@ class NeuralNetwork:
 
                 # Compute loss 
                 if self._loss_func == "binary_cross_entropy":
-                    loss_train = self._binary_cross_entropy(y_batch, y_hat_batch)
+                    loss_train = self._binary_cross_entropy(y_batch.T, y_hat_batch)
                 elif self._loss_func == "mean_squared_error":
-                    loss_train = self._mean_squared_error(y_batch, y_hat_batch)
+                    loss_train = self._mean_squared_error(y_batch.T, y_hat_batch)
                 else:
                     raise ValueError(f"Unsupported loss function: {self._loss_func}")
 
@@ -336,9 +336,9 @@ class NeuralNetwork:
             # Compute validation loss
             y_hat_val, _ = self.forward(X_val)
             if self._loss_func == "binary_cross_entropy":
-                loss_val = self._binary_cross_entropy(y_val, y_hat_val)
+                loss_val = self._binary_cross_entropy(y_val.T, y_hat_val)
             elif self._loss_func == "mean_squared_error":
-                loss_val = self._mean_squared_error(y_val, y_hat_val)
+                loss_val = self._mean_squared_error(y_val.T, y_hat_val)
             else:
                 raise ValueError(f"Unsupported loss function: {self._loss_func}")
             
@@ -475,6 +475,9 @@ class NeuralNetwork:
             loss: float
                 Average loss of mini-batch.
         """
+        print(f"y shape: {y.shape}")
+        print(f"y_hat shape: {y_hat.shape}")
+
         # Compute the mean squared error
         loss = (1 / (2 * y.shape[1])) * np.sum((y_hat - y) ** 2)
 
@@ -494,6 +497,9 @@ class NeuralNetwork:
             dA: ArrayLike
                 partial derivative of loss with respect to A matrix.
         """
+        print(f"y shape: {y.shape}")
+        print(f"y_hat shape: {y_hat.shape}")
+
         # Compute the derivative of the mean squared error
         dA = (2 / y.shape[1]) * (y_hat - y)
 
