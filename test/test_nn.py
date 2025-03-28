@@ -126,7 +126,7 @@ def test_binary_cross_entropy():
     y_true = np.array([[1], [0], [1]])
     y_pred = np.array([[0.9], [0.1], [0.8]])
     loss = toy_nn._binary_cross_entropy(y_true, y_pred)
-    assert loss[0] >= 0, "Loss should be non-negative"
+    assert loss >= 0, "Loss should be non-negative"
 
 def test_binary_cross_entropy_backprop():
     """Test the backpropagation of the binary cross entropy loss function
