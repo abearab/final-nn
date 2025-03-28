@@ -23,7 +23,7 @@ You will begin by finishing the API for generating fully connected neural networ
 * Finish the `sample_seqs` function in the `preprocess.py` file.
 * Finish the `one_hot_encode_seqs` function in the `preprocess.py` file.
 
-## [ ] Step 2: make your autoencoder
+## [x] Step 2: make your autoencoder
 
 ### Background
 
