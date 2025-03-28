@@ -186,14 +186,14 @@ class NeuralNetwork:
             db_curr: ArrayLike
                 Partial derivative of loss function with respect to current layer bias matrix.
         """
+        m = A_prev.shape[1] # number of samples
+
         if activation_curr == "relu":
             dZ_curr = self._relu_backprop(dA_curr, Z_curr)
         elif activation_curr == "sigmoid":
             dZ_curr = self._sigmoid_backprop(dA_curr, Z_curr)
         else:
             raise ValueError(f"Unsupported activation function: {activation_curr}")
-        
-        m = A_prev.shape[1] # number of samples
 
         dW_curr = np.dot(dZ_curr, A_prev.T) / m
         db_curr = np.sum(dZ_curr, axis=0).reshape(b_curr.shape)
@@ -218,6 +218,7 @@ class NeuralNetwork:
             grad_dict: Dict[str, ArrayLike]
                 Dictionary containing the gradient information from this pass of backprop.
         """
+        y = y.T  # Transpose y to match the expected shape
         grad_dict = {}
 
         # Compute the loss derivative
