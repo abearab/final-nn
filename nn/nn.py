@@ -476,7 +476,7 @@ class NeuralNetwork:
                 Average loss of mini-batch.
         """
         # Compute the mean squared error
-        loss = np.sum((y - y_hat) ** 2) / (2 * y.shape[0])
+        loss = (1 / (2 * y.shape[1])) * np.sum((y_hat - y) ** 2)
 
         return loss
     
@@ -495,6 +495,6 @@ class NeuralNetwork:
                 partial derivative of loss with respect to A matrix.
         """
         # Compute the derivative of the mean squared error
-        dA = (2 / y.shape[0]) * (y_hat - y)
+        dA = (2 / y.shape[1]) * (y_hat - y)
 
         return dA
