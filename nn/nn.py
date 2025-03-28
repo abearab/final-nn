@@ -196,7 +196,7 @@ class NeuralNetwork:
             raise ValueError(f"Unsupported activation function: {activation_curr}")
 
         dW_curr = np.dot(dZ_curr, A_prev.T) / m
-        db_curr = np.sum(dZ_curr, axis=0).reshape(b_curr.shape)
+        db_curr = np.sum(dZ_curr, axis=1, keepdims=True) / m
         dA_prev = np.dot(W_curr.T, dZ_curr)
 
         return dA_prev, dW_curr, db_curr
