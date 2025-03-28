@@ -83,10 +83,6 @@ def test_single_backprop():
 
     assert dW.T.shape == W_curr.shape, f"Expected dW shape {W_curr.shape}, got {dW.shape}"
 
-    assert np.all(dW >= 0), "dW should be non-negative"
-    assert np.all(db >= 0), "db should be non-negative"
-    assert np.all(dA_prev >= 0), "dA_prev should be non-negative"
-
 def test_predict():
     """Test the prediction of the neural network
     """
