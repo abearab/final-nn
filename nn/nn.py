@@ -290,46 +290,60 @@ class NeuralNetwork:
         per_epoch_loss_train = []
         per_epoch_loss_val = []
 
+        m = X_train.shape[0] # number of samples
+        n_batches = m // self._batch_size # number of batches
+
         # Loop over epochs
         for epoch in range(self._epochs):
-            # Forward pass
-            y_hat_train, cache_train = self.forward(X_train)
+            # Shuffle the training data
+            indices = np.arange(m)
+            np.random.shuffle(indices)
+            X_train = X_train[indices]
+            y_train = y_train[indices]
 
-            # Compute training loss
-            if self._loss_func == "binary_cross_entropy":
-                loss_train = self._binary_cross_entropy(y_train, y_hat_train)
-            elif self._loss_func == "mean_squared_error":
-                loss_train = self._mean_squared_error(y_train, y_hat_train)
-            else:
-                raise ValueError(f"Unsupported loss function: {self._loss_func}")
+            epoch_loss_train = 0
+            epoch_loss_val = 0
 
-            # Backpropagation
-            grad_dict = self.backprop(y_train, y_hat_train, cache_train)
+            # Loop over mini-batches
+            for i in range(n_batches):
+                start = i * self._batch_size
+                end = min((i + 1) * self._batch_size, m)
+                X_batch = X_train[start:end]
+                y_batch = y_train[start:end]
 
-            # Update parameters
-            self._update_params(grad_dict)
+                # Forward pass
+                y_hat_batch, cache_batch = self.forward(X_batch)
 
-            # Store training loss
-            per_epoch_loss_train.append(loss_train)
+                # Compute loss 
+                if self._loss_func == "binary_cross_entropy":
+                    loss_train = self._binary_cross_entropy(y_batch, y_hat_batch)
+                elif self._loss_func == "mean_squared_error":
+                    loss_train = self._mean_squared_error(y_batch, y_hat_batch)
+                else:
+                    raise ValueError(f"Unsupported loss function: {self._loss_func}")
 
-            # Validation forward pass
-            y_hat_val, _ = self.forward(X_val)
+                epoch_loss_train += loss_train
+
+                # Backpropagation
+                grad_dict = self.backprop(y_batch, y_hat_batch, cache_batch)
+
+                # Update parameters
+                self._update_params(grad_dict)
+            
+            # Compute average loss for the epoch
+            per_epoch_loss_train.append(epoch_loss_train)
 
             # Compute validation loss
+            y_hat_val, _ = self.forward(X_val)
             if self._loss_func == "binary_cross_entropy":
                 loss_val = self._binary_cross_entropy(y_val, y_hat_val)
             elif self._loss_func == "mean_squared_error":
                 loss_val = self._mean_squared_error(y_val, y_hat_val)
             else:
                 raise ValueError(f"Unsupported loss function: {self._loss_func}")
-
-            # Store validation loss
+            
             per_epoch_loss_val.append(loss_val)
-
-            # Print training and validation loss every 10 epochs
-            if epoch % 10 == 0:
-                print(f"Epoch {epoch}: Train Loss: {loss_train:.4f}, Validation Loss: {loss_val:.4f}")
-
+        
         return per_epoch_loss_train, per_epoch_loss_val
 
     def predict(self, X: ArrayLike) -> ArrayLike:
