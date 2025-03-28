@@ -229,16 +229,26 @@ class NeuralNetwork:
         else:
             raise ValueError(f"Unsupported loss function: {self._loss_func}")
         
+        n_layers = len(self.arch)
+
         # Backprop through each layer
-        for idx, layer in reversed(list(enumerate(self.arch))):
-            layer_idx = idx + 1
+        for layer_idx in range(n_layers, 0, -1):
+            # Get the current layer's parameters and cache
             W_curr = self._param_dict[f"W{layer_idx}"]
             b_curr = self._param_dict[f"b{layer_idx}"]
-            A_prev = cache[f"A{layer_idx - 1}"]
             Z_curr = cache[f"Z{layer_idx}"]
-            activation_curr = layer["activation"]
 
-            dA_curr, dW_curr, db_curr = self._single_backprop(W_curr, b_curr, Z_curr, A_prev, dA_curr, activation_curr)
+            # Get the previous layer's activation
+            A_prev = cache[f"A{layer_idx - 1}"]
+
+            # Get the activation function for the current layer
+            activation_curr = self.arch[layer_idx - 1]["activation"]
+
+            # Perform backprop for a single layer
+            dA_curr, dW_curr, db_curr = self._single_backprop(
+                W_curr, b_curr, Z_curr, A_prev, dA_curr, 
+                activation_curr
+                )
 
             # Store gradients in the dictionary
             grad_dict[f"dW{layer_idx}"] = dW_curr
